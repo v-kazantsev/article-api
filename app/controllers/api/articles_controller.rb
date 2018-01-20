@@ -8,6 +8,11 @@ class Api::ArticlesController < ApplicationController
   #   json_response(@article)
   # end
 
+  def index
+    @articles = Article.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    json_response(@articles)
+  end
+
   def by_category
     @articles = Article.where(category_id: Category.joins(:articles).where(name: params[:category]))
     json_response(@articles)
