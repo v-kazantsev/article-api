@@ -18,9 +18,9 @@ class Api::ArticlesController < ApplicationController
     json_response(articles)
   end
 
-  # def by_author
-  #   @articles = Article.where(author.last_name: params[:author])
-  #   json_response(@articles)
-  # end
+  def by_author
+    articles = Article.by_author(params[:author])
+    json_response(articles)
+  end
 
 end
