@@ -9,13 +9,13 @@ class Api::ArticlesController < ApplicationController
   # end
 
   def index
-    @articles = Article.where("created_at >= ?", Time.zone.now.beginning_of_day)
-    json_response(@articles)
+    articles = Article.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    json_response(articles)
   end
 
   def by_category
-    @articles = Article.where(category_id: Category.joins(:articles).where(name: params[:category]))
-    json_response(@articles)
+    articles = Article.by_category(params[:category])
+    json_response(articles)
   end
 
   # def by_author
